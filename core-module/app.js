@@ -66,7 +66,22 @@ const pertanyaan2 = () => {
 const main = async () => {
   const nama = await pertanyaan1();
   const email = await pertanyaan2();
+
+  const contact = {
+    nama,
+    email,
+  };
+
+  const fileBufer = fs.readFileSync("data/contact.json", "utf-8");
+  const data = JSON.parse(fileBufer);
+  data.push(contact);
+
+  fs.writeFileSync("data/contact.json", JSON.stringify(data));
+  console.log("data has created/updated");
+  rl.close();
 };
+
+main();
 
 // rl.question("siapa nama kamu? ", (answer) => {
 //   rl.question("dimana kamu tinggal? ", (live) => {

@@ -1,7 +1,8 @@
 const yargs = require("yargs");
+const { saveContact } = require("./contacts");
 
 yargs.command({
-  conmmand: "add",
+  command: "add",
   describe: "add new contact",
   builder: {
     nama: {
@@ -16,11 +17,7 @@ yargs.command({
     },
   },
   handler(argv) {
-    const contact = {
-      nama: argv.nama,
-      email: argv.email,
-    };
-    console.log(contact);
+    saveContact(argv.nama, argv.email);
   },
 });
 

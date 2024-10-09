@@ -1,5 +1,5 @@
 const yargs = require("yargs");
-const { saveContact, listContacts } = require("./contacts");
+const { saveContact, listContacts, detailContacts } = require("./contacts");
 
 yargs
   .command({
@@ -32,4 +32,35 @@ yargs.command({
   },
 });
 
+//show detail contact
+yargs.command({
+  command: "detail",
+  describe: "show detail by name",
+  builder: {
+    nama: {
+      describe: "Full Name",
+      demandOption: true,
+      type: "string",
+    },
+  },
+  handler(argv) {
+    detailContacts(argv.nama);
+  },
+});
+
+//delete data by name
+yargs.command({
+  command: "delete",
+  describe: "delete by name",
+  builder: {
+    nama: {
+      describe: "Full Name",
+      demandOption: true,
+      type: "string",
+    },
+  },
+  handler(argv) {
+    detailContacts(argv.nama);
+  },
+});
 yargs.parse();

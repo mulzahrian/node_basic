@@ -58,4 +58,18 @@ const listContacts = () => {
   });
 };
 
-module.exports = { saveContact, listContacts };
+const detailContacts = (nama) => {
+  const data = loadContacts();
+  const contact = data.find(
+    (contact) => contact.nama.toLowerCase() === nama.toLowerCase()
+  );
+  if (!contact) {
+    console.log(`${nama} undefine`);
+    return false;
+  }
+
+  console.log(contact.nama);
+  console.log(contact.email);
+};
+
+module.exports = { saveContact, listContacts, detailContacts };

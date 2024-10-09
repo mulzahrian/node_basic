@@ -13,14 +13,21 @@ if (!fs.existsSync(dataPath)) {
   fs.writeFileSync(dataPath, "[]", "utf-8");
 }
 
+const loadContacts = () => {
+  const fileBufer = fs.readFileSync("data/contact.json", "utf-8");
+  const data = JSON.parse(fileBufer);
+  return data;
+};
+
 const saveContact = (nama, email) => {
   const contact = {
     nama,
     email,
   };
 
-  const fileBufer = fs.readFileSync("data/contact.json", "utf-8");
-  const data = JSON.parse(fileBufer);
+  // const fileBufer = fs.readFileSync("data/contact.json", "utf-8");
+  // const data = JSON.parse(fileBufer);
+  const data = loadContacts();
 
   //cek duplicate
   const duplicate = data.find((contact) => contact.nama === nama);
@@ -43,4 +50,12 @@ const saveContact = (nama, email) => {
   console.log("data has created/updated");
 };
 
-module.exports = { saveContact };
+const listContacts = () => {
+  const data = loadContacts();
+  console.log("List Contacts");
+  data.forEach((contact, i) => {
+    console.log(`${i + 1}. ${contact.nama} - ${contact.email}`);
+  });
+};
+
+module.exports = { saveContact, listContacts };

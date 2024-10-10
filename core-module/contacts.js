@@ -72,4 +72,18 @@ const detailContacts = (nama) => {
   console.log(contact.email);
 };
 
-module.exports = { saveContact, listContacts, detailContacts };
+const deleteContacts = (nama) => {
+  const data = loadContacts();
+  const newData = data.filter(
+    (contact) => contact.nama.toLowerCase() !== nama.toLowerCase()
+  );
+
+  if (data.length === newData.length) {
+    console.log("name undefine!");
+    return false;
+  }
+
+  fs.writeFileSync("data/contact.json", JSON.stringify(newData));
+  console.log(`data ${nama} has deleted`);
+};
+module.exports = { saveContact, listContacts, detailContacts, deleteContacts };

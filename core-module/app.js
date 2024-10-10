@@ -1,5 +1,10 @@
 const yargs = require("yargs");
-const { saveContact, listContacts, detailContacts } = require("./contacts");
+const {
+  saveContact,
+  listContacts,
+  detailContacts,
+  deleteContacts,
+} = require("./contacts");
 
 yargs
   .command({
@@ -60,7 +65,7 @@ yargs.command({
     },
   },
   handler(argv) {
-    detailContacts(argv.nama);
+    deleteContacts(argv.nama);
   },
 });
 yargs.parse();
